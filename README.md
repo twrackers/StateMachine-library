@@ -15,6 +15,6 @@ There is also a convenience method, at the class level (i.e. a static method) to
 
 The best way to see how the StateMachine base class can be extended into a really useful class is to look at some of the other classes in this repository.
 
-* [__Arduino/libraries/FadeLED__](https://github.com/twrackers/Arduino-projects/tree/master/libraries/FadeLED)
-* [__Arduino/libraries/Pulser__](https://github.com/twrackers/Arduino-projects/tree/master/libraries/Pulser)
-* [__Arduino/libraries/SlowSwitcher__](https://github.com/twrackers/Arduino-projects/tree/master/libraries/SlowSwitcher)
+* [__FadeLED__](https://github.com/twrackers/FadeLED-library)
+* [__Pulser__](https://github.com/twrackers/Pulser-library)
+* [__SlowSwitcher__](https://github.com/twrackers/SlowSwitcher-library)
