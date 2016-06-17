@@ -5,19 +5,14 @@
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
-
-CFastLED	KEYWORD1
+StateMachine	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-
-# FastLED methods
-addLeds	KEYWORD2
+update	KEYWORD2
+updateAll	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
-
-# Chipsets
-LPD8806	LITERAL1
