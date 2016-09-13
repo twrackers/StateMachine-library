@@ -18,3 +18,6 @@ The best way to see how the StateMachine base class can be extended into a reall
 * [__FadeLED__](https://github.com/twrackers/FadeLED-library)
 * [__Pulser__](https://github.com/twrackers/Pulser-library)
 * [__SlowSwitcher__](https://github.com/twrackers/SlowSwitcher-library)
+
+##NOTE
+The StateMachine timing mechanism relies on the Arduino IDE's _millis()_ function, which returns the number of milliseconds since the Arduino was reset as a 32-bit _unsigned long_.  The internal clock counter will roll over to zero after a little over 49 days.  At this time that will cause unexpected behavior in StateMachine objects.
