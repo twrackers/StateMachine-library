@@ -22,7 +22,7 @@ bool StateMachine::update()
     // Get the current clock time in msec.
     unsigned long now = millis();
     // Have we reached or passed the scheduled time for an update?
-    if (now >= m_nextUpdate) {
+    if ((long) (now - m_nextUpdate) >= 0) {
         // If so, schedule the next update...
         if (m_realTime) {
             // ... based on when this update was scheduled, ...
