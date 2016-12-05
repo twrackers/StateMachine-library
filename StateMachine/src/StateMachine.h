@@ -31,6 +31,10 @@
  * If it's more important to maintain a minimum interval between updates, even
  * if an update runs late, then the constructor should be called with realTime
  * set to false.
+ *
+ * Author: Thomas W Rackers, May 2016
+ * GitHub: https://github.com/twrackers
+ * Blog:   https://modelrailroadelectronics.blog
  */
 class StateMachine
 {

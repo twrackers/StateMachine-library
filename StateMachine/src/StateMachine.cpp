@@ -1,3 +1,11 @@
+/**
+ * StateMachine
+ *
+ * Author: Thomas W Rackers, May 2016
+ * GitHub: https://github.com/twrackers
+ * Blog:   https://modelrailroadelectronics.blog
+ */
+
 #include <StateMachine.h>
 
 // Constructor
