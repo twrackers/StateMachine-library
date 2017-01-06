@@ -2,7 +2,7 @@
 
 StateMachine blinker(1000, true);
 
-const int led = 6;
+const int led = 9;
 bool state = false;   // false is OFF, true is ON
 
 void setup() 
