@@ -12,18 +12,18 @@
  * logic to subclasses which inherit from this class.
  *
  * The concept of real-time in this class requires some explanation.  When the
- * system clock as returned by function millis() is equal or greater than
+ * system clock as returned by function micros() is equal or greater than
  * m_nextUpdate, the time of the next scheduled update, the update() method will
  * update m_nextUpdate with the time of this FSM's next update, then it returns
  * true, indicating whatever subclass has inherited from this class should 
  * perform its update as well.
  *
  * If m_realTime is set to true by the constructor, then the next update will be
- * set to occur m_updateDelta milliseconds later than this update's scheduled
+ * set to occur m_updateDelta microseconds later than this update's scheduled
  * time, even if this update is occurring later than scheduled.
  *
  * If m_realTime is set to false, then the next update will be set to occur 
- * m_updateDelta milliseconds later than when this update is actually occurring.
+ * m_updateDelta microseconds later than when this update is actually occurring.
  *
  * So if trying to keep to a fixed periodic rate on the updates is important,
  * then the constructor should be called with realTime set to true.
@@ -39,7 +39,7 @@
 class StateMachine
 {
     protected:
-        unsigned long m_updateDelta;    // time in milliseconds between updates
+        unsigned long m_updateDelta;    // time between updates
         unsigned long m_nextUpdate;     // time of next scheduled update
         const bool m_realTime;          // real-time vs non-real-time
         
@@ -47,13 +47,16 @@ class StateMachine
         /**
          * Constructor
          *
-         * @param updateDelta interval in milliseconds between update cycles.
+         * @param updateDelta interval between update cycles.
          * @param realTime true enforces periodic updates, false enforces
          *                 minimum intervals between updates
+         * @param hires true if updateDelta is in microseconds rather than
+         *                 milliseconds (default false)
          */
         StateMachine(
             const unsigned int updateDelta, 
-            const bool realTime
+            const bool realTime,
+            const bool hires = false
         );
         
         /**
