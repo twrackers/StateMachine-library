@@ -11,7 +11,7 @@ StateMachine	KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 update	KEYWORD2
-updateAll KEYWORD2
+updateAll	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
