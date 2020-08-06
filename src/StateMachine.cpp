@@ -36,6 +36,10 @@ bool StateMachine::update()
 {
     // Get the current clock time in msec.
     unsigned long now = micros();
+    // If we've missed two or more update cycles, resync.
+    if ((long) (now - m_nextUpdate) > (long) m_updateDelta) {
+        m_nextUpdate = now;
+    }
     // Have we reached or passed the scheduled time for an update?
     if ((long) (now - m_nextUpdate) >= 0) {
         // If so, schedule the next update...
