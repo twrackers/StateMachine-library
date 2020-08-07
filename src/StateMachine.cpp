@@ -16,17 +16,13 @@ StateMachine::StateMachine(
     const bool realTime,              // real-time vs non-real-time
     const bool hires                  // true if updateDelta is usec,
                                       // false if updateDelta is msec (default)
-) : m_updateDelta((unsigned long) updateDelta), m_realTime(realTime)
+) : m_updateDelta((unsigned long) updateDelta),
+    m_realTime(realTime), m_hires(hires)
 {
-    if (hires) {
-      m_updateDelta = (unsigned long) updateDelta;
-    } else {
-      m_updateDelta = (unsigned long) updateDelta * 1000L;
-    }
     // A zero update interval is not allowed, set to minimum of 1.
     if (m_updateDelta == 0) ++m_updateDelta;
     // First update will occur m_updateDelta msec or usec from now.
-    m_nextUpdate = micros() + m_updateDelta;
+    m_nextUpdate = (m_hires ? micros() : millis()) + m_updateDelta;
 }
 
 // Check for time-to-update
@@ -35,11 +31,7 @@ StateMachine::StateMachine(
 bool StateMachine::update()
 {
     // Get the current clock time in msec.
-    unsigned long now = micros();
-    // If we've missed two or more update cycles, resync.
-    if ((long) (now - m_nextUpdate) > (long) m_updateDelta) {
-        m_nextUpdate = now;
-    }
+    unsigned long now = (m_hires ? micros() : millis());
     // Have we reached or passed the scheduled time for an update?
     if ((long) (now - m_nextUpdate) >= 0) {
         // If so, schedule the next update...

@@ -42,6 +42,7 @@ class StateMachine
         unsigned long m_updateDelta;    // time between updates
         unsigned long m_nextUpdate;     // time of next scheduled update
         const bool m_realTime;          // real-time vs non-real-time
+        const bool m_hires;             // usec vs msec timing resolution
         
     public:
         /**
