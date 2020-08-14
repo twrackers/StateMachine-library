@@ -30,7 +30,7 @@ StateMachine::StateMachine(
 // Returns true if it's time to perform the next update of the FSM.
 bool StateMachine::update()
 {
-    // Get the current clock time in msec.
+    // Get the current clock time.
     unsigned long now = (m_hires ? micros() : millis());
     // Have we reached or passed the scheduled time for an update?
     if ((long) (now - m_nextUpdate) >= 0) {
