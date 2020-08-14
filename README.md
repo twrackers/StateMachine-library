@@ -24,4 +24,4 @@ The StateMachine timing mechanism relies on the Arduino IDE's _millis()_ functio
 ## NOTE 2
 The timing behavior above has now been fixed.
 ## NOTE 3
-High-precision (microseconds vs milliseconds) timing is now supported.
+High-precision (microseconds vs milliseconds) timing is now supported.  An optional boolean parameter _hires_ to the constructor causes the StateMachine to select between using _millis()_ or _micros()_ to get the system time.  This also sets the units of the next time to update and the update interval to match the resolution of the clock function being used.
