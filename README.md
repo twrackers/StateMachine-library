@@ -13,13 +13,15 @@ StateMachine is a base class from which subclasses can inherit the basic behavio
   
 There is also a convenience method, at the class level (i.e. a static method) to allow an application to perform the update method on a collection of FSM objects with a single call.
 
-The best way to see how the StateMachine base class can be extended into a really useful class is to look at some of the other classes in this repository.
+The best way to see how the StateMachine base class can be extended into a really useful class is to look at some of the other classes in this repository, all of which inherit from StateMachine.
 
 * [__FadeLED__](https://github.com/twrackers/FadeLED-library)
 * [__Pulser__](https://github.com/twrackers/Pulser-library)
 * [__SlowSwitcher__](https://github.com/twrackers/SlowSwitcher-library)
 
-##NOTE
+## NOTE 1
 The StateMachine timing mechanism relies on the Arduino IDE's _millis()_ function, which returns the number of milliseconds since the Arduino was reset as a 32-bit _unsigned long_.  The internal clock counter will roll over to zero after a little over 49 days.  At this time that will cause unexpected behavior in StateMachine objects.
-##NOTE 2
+## NOTE 2
 The timing behavior above has now been fixed.
+## NOTE 3
+High-precision (microseconds vs milliseconds) timing is now supported.
