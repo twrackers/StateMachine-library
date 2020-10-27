@@ -16,8 +16,7 @@ Git is available for all the same operating systems (Windows, Mac OS X, Linux) w
 3. Change to your `libraries` directory.  From Git Bash, that might look like:
 	`$ cd /c/Users/the_doctor/Arduino/libraries`
 1. From a web browser, go to this library's repository at [https://github.com/twrackers/StateMachine-library](https://github.com/twrackers/StateMachine-library).
-2. Click on the green `Code` button, then under "Clone" click on the little clipboard symbol on the right.  This copies the URL of the repository to your clipboard.  Or you can just copy this:
-	**https://github.com/twrackers/StateMachine-library.git**
+2. Click on the green `Code` button, then under "Clone" click on the little clipboard symbol on the right.  This copies the URL of the repository to your clipboard.
 1. In your command shell, type "git clone ", then paste the URL from the previous step into your command line.  You should see:
 	`$ git clone https://github.com/twrackers/StateMachine-library.git`
 1. Hit `Enter` to clone the repository into your `libraries` directory.
