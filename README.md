@@ -4,17 +4,25 @@ These files define a simple Finite-State Machine class for use with Arduino-type
 
 The original concept is drawn from the description of multitasking on the Arduino in Adafruit's Learn Arduino pages ([https://learn.adafruit.com/multi-tasking-the-arduino-part-1/overview?view=all](https://learn.adafruit.com/multi-tasking-the-arduino-part-1/overview?view=all)).
 
-StateMachine is a base class from which subclasses can inherit the basic behavior of a finite-state machine, or FSM (not to be confused with the Flying Spaghetti Monster).  A custom FSM will extend the StateMachine base class, and must implement two methods:
+*StateMachine* is a base class from which subclasses can inherit the basic behavior of a finite-state machine, or FSM (not to be confused with the Flying Spaghetti Monster).  A custom FSM will extend the *StateMachine* base class, and must implement two methods:
 
 * a constructor to create and initialize a new custom FSM object, and
 * an update method which changes the FSM's internal state based upon time, input conditions, or whatever is required.
 
 There is also a convenience method, at the class level (i.e. a static method) to allow an application to perform the update method on a collection of FSM objects with a single call.
 
-The StateMachine class itself defines no state information other than those parameters which handle the timing.  Derived classes which inherit from StateMachine are responsible for defining any other state information required by the class's logic.
+The *StateMachine* class itself defines no state information other than those parameters which handle the timing.  Derived classes which inherit from *StateMachine* are responsible for defining any other state information required by the class's logic.
   
-The best way to see how the StateMachine base class can be extended into a really useful class is to look at some of the other classes in these repositories, all of which inherit from StateMachine.
+The best way to see how the *StateMachine* base class can be extended into a really useful class is to look at some of the other classes in these repositories, all of which inherit from *StateMachine*.
 
 * [__FadeLED__](https://github.com/twrackers/FadeLED-library)
 * [__Pulser__](https://github.com/twrackers/Pulser-library)
 * [__SlowSwitcher__](https://github.com/twrackers/SlowSwitcher-library)
+
+## Dependencies ##
+
+The *StateMachine* class has no dependencies on any libraries which are not included in the standard Arduino IDE installation.
+
+## Installation ##
+
+Instructions for installing the *StateMachine* class can be found in file `INSTALL.md` in this repository at [https://github.com/twrackers/StateMachine-library/blob/main/INSTALL.md](https://github.com/twrackers/StateMachine-library/blob/main/INSTALL.md).
