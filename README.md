@@ -15,12 +15,13 @@ The `StateMachine` class itself defines no state information other than those pa
 
 ## Examples ##
 
-The `StateMachine` library includes a pair of example sketches in the `examples` directory.
+The `StateMachine` library includes a few example sketches in the `examples` directory.
 
 - `BlinkOneLED.ino` behaves in a similar manner to the `Blink` example which is supplied with the Arduino IDE, except a `StateMachine` object is used rather than `delay()` calls to set the timing of a blinking LED.  It defaults to using GPIO pin 9 to drive the LED, but you can edit the source to use `LED_BUILTIN` instead.
 - `BlinkThreeLEDs.ino` expands the one-LED example to control **three** LEDs, connected by default to GPIO pins 6, 5, and 3.  Each `StateMachine` object is defined with a slightly different update period of about 1 second, and each will control one of the three LEDs.
+- `BlinkClassy.ino` blinks four LEDs on pins 8, 9, 10, 11 at slightly different rates.  In this example, a `Blinky` class derives from `StateMachine`, and each `Blinky` is assigned its own GPIO pin number and update period.  With update periods of 1000, 1010, 1020, and 1030 milliseconds, the four LEDs will resynchronize every 530553000 milliseconds, or about 6 days 3 hours 22 minutes.  (530553000 is the lowest common multiple or LCM of the four periods.)
   
-The best way to see how the `StateMachine` base class can be extended into a really useful class is to look at some of the other classes in these repositories, all of which inherit from `StateMachine`.
+Another way to see how the `StateMachine` base class can be extended into a really useful class is to look at some of the other classes in these repositories which inherit from `StateMachine`.
 
 * [__FadeLED__](https://github.com/twrackers/FadeLED-library)
 * [__Pulser__](https://github.com/twrackers/Pulser-library)
