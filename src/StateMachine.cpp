@@ -12,17 +12,18 @@
 //
 // See StateMachine.h for explanation of real-time vs non-real-time operation.
 StateMachine::StateMachine(
-    const unsigned int updateDelta,   // time between updates
-    const bool realTime,              // real-time vs non-real-time
+    const unsigned int updateDelta,   // time between updates (default zero)
+    const bool realTime,              // true for real-time (default),
+                                      // false for non-real-time
     const bool hires                  // true if updateDelta is usec,
                                       // false if updateDelta is msec (default)
-) : m_updateDelta((unsigned long) updateDelta),
+) : m_updateDelta((unsigned long) updateDelta), m_nextUpdate(0L),
     m_realTime(realTime), m_hires(hires)
 {
-    // A zero update interval is not allowed, set to minimum of 1.
-    if (m_updateDelta == 0) ++m_updateDelta;
-    // First update will occur m_updateDelta msec or usec from now.
-    m_nextUpdate = (m_hires ? micros() : millis()) + m_updateDelta;
+    if (m_updateDelta) {
+        // First update will occur m_updateDelta msec or usec from now.
+        m_nextUpdate = (m_hires ? micros() : millis()) + m_updateDelta;
+    }
 }
 
 // Check for time-to-update
@@ -30,6 +31,10 @@ StateMachine::StateMachine(
 // Returns true if it's time to perform the next update of the FSM.
 bool StateMachine::update()
 {
+    // Return right away if m_updateDelta is zero.
+    if (m_updateDelta == 0) {
+        return true;
+    }
     // Get the current clock time.
     unsigned long now = (m_hires ? micros() : millis());
     // Have we reached or passed the scheduled time for an update?

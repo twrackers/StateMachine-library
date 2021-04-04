@@ -13,6 +13,38 @@ There is also a convenience method, at the class level (i.e. a static method) to
 
 The `StateMachine` class itself defines no state information other than those parameters which handle the timing.  Derived classes which inherit from `StateMachine` are responsible for defining any other state information required by the class's logic.
 
+## Real-time vs. Non-real-time ##
+
+A `StateMachine` can be created as a *real-time* or a *non-real-time* object.  The difference is in how each update is scheduled after the previous update.
+
+- If `update()` is called before the next update is scheduled, no action is taken and `false` is returned.
+- If `update()` is called when or after the next update was scheduled, the state of the `StateMachine` object is updated, and the following update is scheduled.  After updating and rescheduling occur, `true` is returned.
+	- In real-time mode, the time of the next update will be the time when the current update was scheduled, plus the update interval given when the state machine was created.  So even if the current update is occurring late, the next one should happen on time as long as it isn't late as well.
+	- In non-real-time mode, the next update will not be scheduled relative to when the current update was scheduled to happen, but when it *does* happen.
+
+As an example, let's define two state machines as follows.
+
+    StateMachine fsmRT(500, true);
+    StateMachine fsmNRT(500, false);
+
+Suppose both are scheduled to do their next updates when the clock (`millis()` in the Arduino library) reaches 10000.  However, due to a longer than expected operation, both try to update when the clock reads 10100, or 100 milliseconds late.  Both will update, but `fsmRT` will schedule its next update at 10500, while `fsmNRT` will be scheduled for 10600, or 500 milliseconds after the current time, not its previous scheduled time of 10000.
+
+In the special case where the state machine is created without an update interval, or with a zero interval, then no scheduling is done and the state machine can update upon every pass through `loop()`.
+
+### Use cases ###
+
+A state machine with a zero update delay can be used in cases where the timing of state changes is not important, only their sequencing matter.  An example would be a state machine which parses a string of characters according to one or more patterns.
+
+A real-time state machine would be used for cases where it's important to maintain a fixed pace, even if an update occasionally occurs a little late.
+
+A non-real-time state machine would be used for cases where it's more important to maintain a minimum interval between one update and the next.  So if an update occurs a little late, all following updates would nominally be bumped back by the delay.
+
+## High-resolution mode ##
+
+By default, a `StateMachine` is created in low-resolution mode.  In this mode, the interval between updates is set in *milliseconds*.  In low-resolution mode, the timing code will roll over to zero every 2³² milliseconds, or just over 49 days 17 hours.
+
+If a `StateMachine` is created in high-resolution mode (see the constructor definition in the API section below), the update interval is set in *microseconds*.  In this mode, the timing code will roll over every 2³² *micro*seconds, or just over 71 minutes 35 seconds.
+
 ## Examples ##
 
 The `StateMachine` library includes a few example sketches in the `examples` directory.
@@ -34,3 +66,55 @@ The `StateMachine` class has no dependencies on any libraries which are not incl
 ## Installation ##
 
 Instructions for installing the *StateMachine* class can be found in file `INSTALL.md` in this repository at [https://github.com/twrackers/StateMachine-library/blob/main/INSTALL.md](https://github.com/twrackers/StateMachine-library/blob/main/INSTALL.md).
+
+## API ##
+
+### *StateMachine(const unsigned int updateDelta = 0L, const bool realTime = true, const bool hires = false)* ###
+
+The constructor creates an instance of a `StateMachine` object.  The constructor call can take on any of four forms, depending on how many of the calling arguments take their default values.
+
+- `StateMachine()` creates a state machine object with no timing constraints; it can be updated on every pass through the sketch's `loop()` function.
+- `StateMachine(updateDelta)` creates a state machine object that will only update its state at intervals of `updateDelta` milliseconds.  The object will run in the default real-time mode.
+- `StateMachine(updateDelta, realTime)` is the same as `StateMachine(updateDelta)`, except it will run in *non-real-time* mode if `realTime` is `false`.
+- `StateMachine(updateDelta, realTime, hires)` is the same as `StateMachine(updateDelta, realTime)`, except `updateDelta` will be in *microseconds* instead of milliseconds.  This also changes the resolution of the timing code which schedules updates of the state.
+
+#### Arguments ####
+
+- **updateDelta: const unsigned long:** Time between scheduled updates, in milliseconds or microseconds depending on `hires` argument.  A zero value (the default if not specified) disables scheduling, allowing updates to occur upon every step.
+- **realTime: const bool:** Sets real-time (if `true`, the default) or non-real-time (if `false`) mode of state machine.
+- **hires: const bool:** Sets microsecond timing (if `true`) or millisecond timing (if `false`, the default).
+
+### *virtual bool update()* ###
+
+Checks if it is time to update the state of the `StateMachine` object.  This method should be called from within the Arduino sketch's `loop()` function.
+
+#### Returns ####
+
+- **bool:** `true` if object's state has been updated.  If state machine is running scheduled (`updateDelay` is not zero), the state will be updated the first time `update()` is called since the arrival of the scheduled time, and `true` will be returned.   If the state machine is running unscheduled (`updateDelay` is zero), the state will be updated every time, and `true` will be returned.
+
+### *static void updateAll(StateMachine\*\* fsm, const int num)* ###
+
+Allows the update of a collection of state machine objects with a single call.  Note that the calling function will not have access to the Boolean return values of the `update()` methods.
+
+To use this method, an array of pointers to `StateMachine` objects must be defined, as follows.
+
+    StateMachine fsm1(t1, true);		// RT, lo-res
+    StateMachine fsm2(t2, false);		// non-RT, lo-res
+    StateMachine fsm3(t3, true, true);	// RT, hi-res
+    
+    const int NUM_FSMS = 3;
+    StateMachine* fsm_list[NUM_FSMS] = {&fsm1, &fsm2, &fsm3};	// array of pointers to FSMs
+    
+    ...
+    
+    void loop() {
+    	...
+    	StateMachine::updateAll(fsm_list, NUM_FSMS);	// call to CLASS method
+    	...
+    }
+
+#### Arguments ####
+
+- **fsm: StateMachine\*\*:** Pointer to array of pointers to `StateMachine` objects.
+- **num: const int:** Number of pointers in `fsm` array.
+

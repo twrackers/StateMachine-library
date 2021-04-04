@@ -32,6 +32,10 @@
  * if an update runs late, then the constructor should be called with realTime
  * set to false.
  *
+ * The update interval can be set to zero, or omitted to use the default of
+ * zero.  In this case, the clock is not read to determine if it's time to
+ * perform an update; the update will occur every time update() is called.
+ *
  * Author: Thomas W Rackers, May 2016
  * GitHub: https://github.com/twrackers
  * Blog:   https://modelrailroadelectronics.blog
@@ -48,15 +52,15 @@ class StateMachine
         /**
          * Constructor
          *
-         * @param updateDelta interval between update cycles.
+         * @param updateDelta interval between update cycles (default zero)
          * @param realTime true enforces periodic updates, false enforces
-         *                 minimum intervals between updates
+         *                 minimum intervals between updates (default true)
          * @param hires true if updateDelta is in microseconds rather than
          *              milliseconds (default false)
          */
         StateMachine(
-            const unsigned int updateDelta, 
-            const bool realTime,
+            const unsigned int updateDelta = 0, 
+            const bool realTime = true,
             const bool hires = false
         );
         
