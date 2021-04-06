@@ -45,10 +45,10 @@ A state machine with a non-zero update delay can be used to perform simple tasks
     ...
     void loop() {
         ...
-	if (blipper.update()) {
-	    blip();
-	}
-	...
+        if (blipper.update()) {
+            blip();
+        }
+        ...
     }
 
 A real-time state machine would be used for cases where it's important to maintain a fixed pace, even if an update occasionally occurs a little late.
