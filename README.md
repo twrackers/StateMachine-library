@@ -37,6 +37,20 @@ In the special case where the state machine is created without an update interva
 
 A state machine with a zero update delay can be used in cases where the timing of state changes is not important, only their sequencing matter.  An example would be a state machine which parses a string of characters according to one or more patterns.
 
+A state machine with a non-zero update delay can be used to perform simple tasks at a regular rate, either in real-time or non-real-time mode, without creating a derived class of `StateMachine`.  For example, to call a function `blip()` every 100 milliseconds, you could use something like this.
+
+    #include <StateMachine.h>
+    ...
+    StateMachine blipper(100, true);
+    ...
+    void loop() {
+        ...
+	if (blipper.update()) {
+	    blip();
+	}
+	...
+    }
+
 A real-time state machine would be used for cases where it's important to maintain a fixed pace, even if an update occasionally occurs a little late.
 
 A non-real-time state machine would be used for cases where it's more important to maintain a minimum interval between one update and the next.  So if an update occurs a little late, all following updates would nominally be bumped back by the delay.
