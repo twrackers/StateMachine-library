@@ -13,9 +13,9 @@ The constructor creates an instance of a `StateMachine` object.  The constructor
 
 #### Arguments ####
 
-- **updateDelta: const unsigned long:** Time between scheduled updates, in milliseconds or microseconds depending on `hires` argument.  A zero value (the default if not specified) disables scheduling, allowing updates to occur upon every step.
-- **realTime: const bool:** Sets real-time (if `true`, the default) or non-real-time (if `false`) mode of state machine.
-- **hires: const bool:** Sets microsecond timing (if `true`) or millisecond timing (if `false`, the default).
+- *updateDelta: const unsigned long*: Time between scheduled updates, in milliseconds or microseconds depending on `hires` argument.  A zero value (the default if not specified) disables scheduling, allowing updates to occur upon every step.
+- *realTime: const bool*: Sets real-time (if `true`, the default) or non-real-time (if `false`) mode of state machine.
+- *hires: const bool*: Sets microsecond timing (if `true`) or millisecond timing (if `false`, the default).
 
 ### *virtual bool update()* ###
 
@@ -23,7 +23,7 @@ Checks if it is time to update the state of the `StateMachine` object.  This met
 
 #### Returns ####
 
-- **bool:** `true` if object's state has been updated.  If state machine is running scheduled (`updateDelay` is not zero), the state will be updated the first time `update()` is called since the arrival of the scheduled time, and `true` will be returned.   If the state machine is running unscheduled (`updateDelay` is zero), the state will be updated every time, and `true` will be returned.
+- *bool*: `true` if object's state has been updated.  If state machine is running scheduled (`updateDelay` is not zero), the state will be updated the first time `update()` is called since the arrival of the scheduled time, and `true` will be returned.   If the state machine is running unscheduled (`updateDelay` is zero), the state will be updated every time, and `true` will be returned.
 
 ### *static void updateAll(StateMachine\*\* fsm, const int num)* ###
 
@@ -48,6 +48,6 @@ To use this method, an array of pointers to `StateMachine` objects must be defin
 
 #### Arguments ####
 
-- **fsm: StateMachine\*\*:** Pointer to array of pointers to `StateMachine` objects.
-- **num: const int:** Number of pointers in `fsm` array.
+- *fsm: StateMachine\*\**: Pointer to array of pointers to `StateMachine` objects.
+- *num: const int*: Number of pointers in `fsm` array.
 
