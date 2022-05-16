@@ -81,4 +81,4 @@ The `StateMachine` class has no dependencies on any libraries which are not incl
 
 ## Installation ##
 
-Instructions for installing the *StateMachine* class can be found in file `INSTALL.md` in this repository at [https://github.com/twrackers/StateMachine-library/blob/main/INSTALL.md](https://github.com/twrackers/StateMachine-library/blob/main/INSTALL.md).
+Instructions for installing the `StateMachine` library can be found in file `INSTALL.md` in this repository at [https://github.com/twrackers/StateMachine-library/blob/main/INSTALL.md](https://github.com/twrackers/StateMachine-library/blob/main/INSTALL.md).
