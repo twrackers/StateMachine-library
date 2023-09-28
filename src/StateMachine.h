@@ -59,7 +59,7 @@ class StateMachine
          *              milliseconds (default false)
          */
         StateMachine(
-            const unsigned int updateDelta = 0, 
+            const unsigned long updateDelta = 0L, 
             const bool realTime = true,
             const bool hires = false
         );
