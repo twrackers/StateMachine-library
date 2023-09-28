@@ -12,12 +12,12 @@
 //
 // See StateMachine.h for explanation of real-time vs non-real-time operation.
 StateMachine::StateMachine(
-    const unsigned int updateDelta,   // time between updates (default zero)
+    const unsigned long updateDelta,  // time between updates (default zero)
     const bool realTime,              // true for real-time (default),
                                       // false for non-real-time
     const bool hires                  // true if updateDelta is usec,
                                       // false if updateDelta is msec (default)
-) : m_updateDelta((unsigned long) updateDelta), m_nextUpdate(0L),
+) : m_updateDelta(updateDelta), m_nextUpdate(0L),
     m_realTime(realTime), m_hires(hires)
 {
     if (m_updateDelta) {
