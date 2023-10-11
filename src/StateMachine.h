@@ -44,6 +44,11 @@
 typedef bool realtime_t;
 typedef bool hires_t;
 
+const realtime_t NON_RT = false;
+const realtime_t RT = true;
+const hires_t MILLIS = false;
+const hires_t MICROS = true;
+
 class StateMachine
 {
     protected:
@@ -53,13 +58,6 @@ class StateMachine
         const bool m_hires;           // usec vs msec timing resolution
         
     public:
-        /**
-         * Constants
-        */
-        const realtime_t NON_RT = false;
-        const realtime_t RT = true;
-        const hires_t MILLIS = false;
-        const hires_t MICROS = true;
         /**
          * Constructor
          *
