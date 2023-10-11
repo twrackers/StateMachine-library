@@ -40,6 +40,10 @@
  * GitHub: https://github.com/twrackers
  * Blog:   https://modelrailroadelectronics.blog
  */
+
+typedef bool realtime_t;
+typedef bool hires_t;
+
 class StateMachine
 {
     protected:
@@ -49,6 +53,13 @@ class StateMachine
         const bool m_hires;           // usec vs msec timing resolution
         
     public:
+        /**
+         * Constants
+        */
+        const realtime_t NON_RT = false;
+        const realtime_t RT = true;
+        const hires_t MILLIS = false;
+        const hires_t MICROS = true;
         /**
          * Constructor
          *
@@ -60,8 +71,8 @@ class StateMachine
          */
         StateMachine(
             const unsigned long updateDelta = 0L, 
-            const bool realTime = true,
-            const bool hires = false
+            const realtime_t realTime = RT,
+            const hires_t hires = MILLIS
         );
         
         /**
