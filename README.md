@@ -6,7 +6,7 @@ The `StateMachine` class defines a framework for *Finite-State Machines* for use
 
 The original concept is drawn from the description of multitasking on the Arduino in Adafruit's Learn Arduino pages ([https://learn.adafruit.com/multi-tasking-the-arduino-part-1](https://learn.adafruit.com/multi-tasking-the-arduino-part-1)).
 
-`StateMachine` is a base class from which subclasses can inherit the basic behavior of a finite-state machine, or FSM (not to be confused with the Flying Spaghetti Monster).  A custom FSM will extend the `StateMachine` base class, and must implement two methods:
+`StateMachine` is a base class from which subclasses can inherit the basic behavior of a finite-state machine, or FSM (not to be confused with the [Flying Spaghetti Monster](https://en.wikipedia.org/wiki/Flying_Spaghetti_Monster)).  A custom FSM will extend the `StateMachine` base class, and must implement two methods:
 
 * a constructor to create and initialize a new custom FSM object, and
 * an update method which changes the FSM's internal state based upon time, input conditions, or whatever is required.
