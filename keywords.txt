@@ -6,13 +6,20 @@
 # Datatypes (KEYWORD1)
 #######################################
 StateMachine	KEYWORD1
+realtime_t		KEYWORD1
+hires_t				KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-update	KEYWORD2
-updateAll	KEYWORD2
+update				KEYWORD2
+setInterval		KEYWORD2
+updateAll			KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
+NON_RT				LITERAL1
+RT						LITERAL1
+MILLIS				LITERAL1
+MICROS				LITERAL1

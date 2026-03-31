@@ -85,6 +85,15 @@ class StateMachine
          * @return true if time for update, false otherwise
          */
         virtual bool update();
+
+        /**
+         * Adjust update interval
+         *
+         * Allows the interval between update cycles to be adjusted. The new interval
+         * will not take affect until the next time-to-update arrives. The `hires` 
+         * and `realTime` settings are not changed.
+         */
+        virtual void setInterval(const unsigned long delta);
         
         /**
          * Update a list of StateMachine objects

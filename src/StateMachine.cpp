@@ -54,6 +54,12 @@ bool StateMachine::update()
     return false;
 }
 
+// Adjust update interval.
+void StateMachine::setInterval(const unsigned long delta)
+{
+    m_updateDelta = delta;
+}
+
 // Perform updates on a collection of StateMachine objects.
 void StateMachine::updateAll(
     StateMachine** fsm, // pointer to array of pointers to StateMachine objects
